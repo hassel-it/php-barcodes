@@ -1,5 +1,5 @@
 {
-	"name": "violuke/php-barcodes",
+	"name": "hassel-it/php-barcodes",
 	"description": "A collection of PHP classes for managing barcodes.",
 	"license": "GPL-3.0+",
 	"require": {

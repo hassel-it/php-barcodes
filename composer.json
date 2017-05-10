@@ -9,8 +9,13 @@
     "phpunit/phpunit": "^5.0"
   },
   "autoload": {
-    "psr-0": {
-      "HasselIT\\Barcodes": "src"
+    "psr-4": {
+      "HasselIT\\Barcodes\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HasselIT\\Barcodes\\Test\\": "tests"
     }
   }
 }

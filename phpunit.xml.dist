@@ -13,25 +13,27 @@
 
     <!-- Add any additional test suites you want to run here -->
     <testsuites>
-        <testsuite name="B2 Test Suite">
+        <testsuite name="Test Suite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
-    <!-- Prevent coverage reports from looking in tests and vendors -->
+    <!-- Ignore vendor tests in code coverage reports -->
     <filter>
-
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-
         <blacklist>
             <directory suffix=".php">./vendor/</directory>
-            <directory suffix=".ctp">./vendor/</directory>
-
             <directory suffix=".php">./tests/</directory>
-            <directory suffix=".ctp">./tests/</directory>
         </blacklist>
     </filter>
 
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="build/test" charset="UTF-8" highlight="false" lowUpperBound="80" highLowerBound="99"/>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
+    </logging>
 </phpunit>

@@ -25,7 +25,8 @@ class BarcodeValidator
     const TYPE_EAN_8 = 'EAN-8';
     const TYPE_EAN = 'EAN';
     const TYPE_UPC = 'UPC';
-    const TYPE_UPC_COUPON_CODE = 'UPC Coupon Code';
+    const TYPE_UPC_COUPON_CODE = 'UPC_COUPON_CODE';
+    const TYPE_EAN_RESTRICTED = 'EAN_RESTRICTED';
 
     public function __construct($barcode)
     {
@@ -34,7 +35,8 @@ class BarcodeValidator
         // Trims parsed string to remove unwanted whitespace or characters
         $this->barcode = trim($this->barcode);
         if (preg_match('/[^0-9]/', $this->barcode)) {
-            return false;
+            $this->valid = false;
+            return;
         }
 
         if (!is_string($this->barcode)) {
@@ -77,8 +79,11 @@ class BarcodeValidator
                 // GTIN-14 code
                 $this->type = self::TYPE_GTIN;
             } else {
-                // EAN code
-                $this->type = self::TYPE_EAN;
+                if (substr($this->gtin14, 5, 1) == 2) {
+                    $this->type = self::TYPE_EAN_RESTRICTED;
+                } else {
+                    $this->type = self::TYPE_EAN;
+                }
             }
         } else {
             return false;
